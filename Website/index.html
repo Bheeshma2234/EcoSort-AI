@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSort AI | Smart Waste Segregation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-shape shape-one"></div>
+    <div class="background-shape shape-two"></div>
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">♻</div>
+            <div>
+                <h2>EcoSort <span>AI</span></h2>
+                <small>Smart Waste Intelligence</small>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#analyzer">Analyzer</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">
+            ☾
+        </button>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    🌍 AI for a Sustainable Future
+                </div>
+
+                <h1>
+                    Sort Smarter.<br>
+                    <span>Live Greener.</span>
+                </h1>
+
+                <p>
+                    Identify waste, discover the right disposal method,
+                    and make environmentally responsible choices with
+                    EcoSort AI.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#analyzer" class="primary-btn">
+                        Analyze Waste →
+                    </a>
+
+                    <a href="#about" class="secondary-btn">
+                        Learn More
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+
+                    <div>
+                        <strong>6+</strong>
+                        <span>Waste Categories</span>
+                    </div>
+
+                    <div>
+                        <strong>8+</strong>
+                        <span>Test Cases</span>
+                    </div>
+
+                    <div>
+                        <strong>SDG 12</strong>
+                        <span>Primary Goal</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="floating-card card-one">
+                    ♻️
+                    <div>
+                        <strong>Recyclable</strong>
+                        <small>Plastic Bottle</small>
+                    </div>
+                </div>
+
+                <div class="eco-circle">
+
+                    <div class="leaf">🌿</div>
+
+                    <div class="circle-text">
+                        ECO<br>
+                        SORT
+                    </div>
+
+                </div>
+
+                <div class="floating-card card-two">
+                    🌱
+                    <div>
+                        <strong>Eco Tip</strong>
+                        <small>Reuse before recycling</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANALYZER -->
+
+        <section class="section" id="analyzer">
+
+            <div class="section-heading">
+                <div class="section-label">SMART ANALYZER</div>
+
+                <h2>
+                    What are you throwing away?
+                </h2>
+
+                <p>
+                    Describe your waste item and get an instant
+                    segregation recommendation.
+                </p>
+            </div>
+
+
+            <div class="analyzer-card">
+
+                <div class="input-area">
+
+                    <label for="wasteInput">
+                        Enter or describe a waste item
+                    </label>
+
+                    <div class="search-box">
+
+                        <span>🔍</span>
+
+                        <input
+                            type="text"
+                            id="wasteInput"
+                            placeholder="Example: used plastic water bottle"
+                            onkeydown="handleEnter(event)"
+                        >
+
+                        <button onclick="analyzeWaste()">
+                            Analyze
+                        </button>
+
+                    </div>
+
+                    <div class="examples">
+
+                        <span>Try:</span>
+
+                        <button onclick="useExample('banana peel')">
+                            🍌 Banana Peel
+                        </button>
+
+                        <button onclick="useExample('plastic bottle')">
+                            🧴 Plastic Bottle
+                        </button>
+
+                        <button onclick="useExample('old mobile phone')">
+                            📱 Mobile Phone
+                        </button>
+
+                        <button onclick="useExample('used battery')">
+                            🔋 Battery
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="upload-area">
+
+                    <div class="upload-icon">📷</div>
+
+                    <h3>Image Analysis</h3>
+
+                    <p>
+                        Upload an image for future AI-based
+                        visual classification.
+                    </p>
+
+                    <label class="upload-btn">
+                        Choose Image
+                        <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/*"
+                            onchange="previewImage(event)"
+                        >
+                    </label>
+
+                    <div id="imagePreview"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div id="resultSection" class="result-section hidden">
+
+                <div class="result-header">
+
+                    <div>
+                        <div class="section-label">
+                            ANALYSIS COMPLETE
+                        </div>
+
+                        <h2>EcoSort Recommendation</h2>
+                    </div>
+
+                    <div id="confidence" class="confidence">
+                        95% Confidence
+                    </div>
+
+                </div>
+
+
+                <div class="result-grid">
+
+                    <div class="result-main">
+
+                        <div class="category-icon" id="categoryIcon">
+                            ♻️
+                        </div>
+
+                        <div>
+                            <span class="result-label">
+                                WASTE CATEGORY
+                            </span>
+
+                            <h2 id="category">
+                                Recyclable Waste
+                            </h2>
+
+                            <p id="reason">
+                                Reason will appear here.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-info">
+
+                        <div class="info-box">
+                            <span>🗑️</span>
+
+                            <div>
+                                <small>Recommended Action</small>
+                                <p id="disposal"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="info-box">
+                            <span>🌱</span>
+
+                            <div>
+                                <small>Sustainability Tip</small>
+                                <p id="tip"></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="warning" class="warning hidden">
+                    ⚠️ <span></span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY CARDS -->
+
+        <section class="section" id="categories">
+
+            <div class="section-heading">
+                <div class="section-label">WASTE GUIDE</div>
+
+                <h2>Know Your Waste</h2>
+
+                <p>
+                    Understanding waste categories makes
+                    responsible disposal easier.
+                </p>
+            </div>
+
+
+            <div class="category-grid">
+
+                <div class="category-card">
+                    <div>🍃</div>
+                    <h3>Organic</h3>
+                    <p>Food scraps, fruit and vegetable peels.</p>
+                    <span>Compost / Wet Waste</span>
+                </div>
+
+                <div class="category-card">
+                    <div>♻️</div>
+                    <h3>Recyclable</h3>
+                    <p>Paper, cardboard and suitable plastics.</p>
+                    <span>Dry / Recycling</span>
+                </div>
+
+                <div class="category-card">
+                    <div>📱</div>
+                    <h3>E-Waste</h3>
+                    <p>Phones, chargers, computers and electronics.</p>
+                    <span>Authorized Collection</span>
+                </div>
+
+                <div class="category-card">
+                    <div>🔋</div>
+                    <h3>Hazardous</h3>
+                    <p>Batteries, chemicals and certain special waste.</p>
+                    <span>Special Handling</span>
+                </div>
+
+                <div class="category-card">
+                    <div>🍾</div>
+                    <h3>Glass</h3>
+                    <p>Glass bottles and containers.</p>
+                    <span>Glass Collection</span>
+                </div>
+
+                <div class="category-card">
+                    <div>🗑️</div>
+                    <h3>General</h3>
+                    <p>Items that cannot be confidently recycled.</p>
+                    <span>Check Local Rules</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD -->
+
+        <section class="section dashboard-section">
+
+            <div class="section-heading">
+                <div class="section-label">YOUR ECO JOURNEY</div>
+
+                <h2>Your Waste Analysis</h2>
+
+                <p>
+                    Your analysis history is stored locally in your browser.
+                </p>
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="stat-card">
+                    <span>🔎</span>
+                    <strong id="totalAnalyses">0</strong>
+                    <small>Total Analyses</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>♻️</span>
+                    <strong id="recyclableCount">0</strong>
+                    <small>Recyclable Items</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>🌱</span>
+                    <strong id="ecoPoints">0</strong>
+                    <small>Eco Points</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>🏆</span>
+                    <strong id="ecoLevel">Beginner</strong>
+                    <small>Eco Level</small>
+                </div>
+
+            </div>
+
+
+            <div class="history-card">
+
+                <div class="history-header">
+                    <h3>Recent Analysis</h3>
+
+                    <button onclick="clearHistory()">
+                        Clear History
+                    </button>
+                </div>
+
+                <div id="history">
+                    <p class="empty-history">
+                        No analyses yet. Start analyzing your waste!
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section class="section about-section" id="about">
+
+            <div class="about-content">
+
+                <div>
+                    <div class="section-label">ABOUT THE PROJECT</div>
+
+                    <h2>
+                        Technology for a cleaner tomorrow.
+                    </h2>
+
+                    <p>
+                        EcoSort AI is an AI-assisted sustainability
+                        project designed to help people make better
+                        waste-segregation decisions.
+                    </p>
+
+                    <p>
+                        The project supports
+                        <strong>SDG 12 – Responsible Consumption
+                        and Production</strong> and contributes to
+                        awareness of sustainable communities.
+                    </p>
+                </div>
+
+
+                <div class="sdg-card">
+
+                    <div class="sdg-number">12</div>
+
+                    <div>
+                        <strong>UN Sustainable Development Goal</strong>
+                        <p>
+                            Responsible Consumption and Production
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div>
+            <strong>EcoSort AI</strong>
+            <p>Smart Waste Segregation Assistant</p>
+        </div>
+
+        <div>
+            <p>AI for Sustainability • SDG 12</p>
+            <p>Student Project Prototype</p>
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
